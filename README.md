@@ -31,7 +31,7 @@ usalista/ <br>
 ├── app/ <br>
 │ ├── models/ <br>
 │ │ ├── user.py <br>
-│ │ ├── shopping_list.py 
+│ │ ├── shopping_list.py <br> 
 │ │ └── item_lista.py <br>
 │ ├── services/ <br>
 │ ├── routers/ <br>
