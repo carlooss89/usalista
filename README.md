@@ -29,13 +29,16 @@ O **Usalista** tem como objetivo permitir que usuários criem, editem e acompanh
 usalista/ <br>
 │
 ├── app/ <br>
-    ├── services/ <br>
-    │   └── user_service.py <br>
+│   ├── schemas/
+│   │   ├──__init__.py
+│   │   └── user.py
+│   ├── services/ <br>
+│   │   └── user_service.py <br>
 │   ├── models/ <br>
 │   ├── user.py <br>
 │   ├── shopping_list.py <br>  
 │   ├── shopping_list.py <br> 
-│   └── item_lista.py <br>
+│   │── item_lista.py <br>
 │   ├── services/ <br>
 │   ├── routers/ <br>
 │   ├── database.py <br>
