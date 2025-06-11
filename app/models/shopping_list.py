@@ -11,8 +11,8 @@ class ShoppingList(Base): #Nome da tabela shopping_lists. Define o modelo / tabe
     
     title = Column(String, index=True, nullable=False) #title – rótulo da lista (“Compra da semana”). Índice melhora busca por título. Coluna de título da lista, com índice para buscas rápidas e não pode ser nula.
     
-    items = Column(String, nullable=True)  # Pode ser um JSON ou string simples. items – aqui depois posso trocar por JSON ou criar uma tabela Item independente.
-    
     owner_id = Column(Integer, ForeignKey("users.id")) # owner_id – chave estrangeira que referencia o id do usuário na tabela users. Coluna inteira, chave estrangeira que referencia a tabela de usuários. owner_id conecta cada lista a um usuário; ForeignKey("users.id") garante integridade referencial.
 
     owner = relationship("User", back_populates="lists") # Cria um relacionamento com a tabela User, onde "lists" é o nome do atributo na classe User que referencia as listas de compras do usuário. owner é a volta do relacionamento: cada lista “sabe” quem é seu usuário.
+    
+    items = relationship("ItemLista", back_populates="shopping_list", cascade="all, delete-orphan") # Cria um relacionamento com a tabela ItemLista, onde "shopping_list" é o nome do atributo na classe ItemLista que referencia a lista de compras. items é a volta do relacionamento: cada lista “sabe” quais itens ela contém.
