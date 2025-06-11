@@ -30,7 +30,7 @@ usalista/ <br>
 │
 ├── app/ <br>
 │   ├── schemas/
-│   │   ├──__init__.py
+│   │   ├── __init__.py<br>
 │   │   └── user.py
 │   ├── services/ <br>
 │   │   └── user_service.py <br>
