@@ -29,9 +29,9 @@ O **Usalista** tem como objetivo permitir que usuários criem, editem e acompanh
 usalista/ <br>
 │
 ├── app/ <br>
-│   ├── schemas/
-│   │   ├── __init__.py<br>
-│   │   └── user.py
+│   ├── schemas/ <br>
+│   │   ├── init.py <br>
+│   │   └── user.py <br>
 │   ├── services/ <br>
 │   │   └── user_service.py <br>
 │   ├── models/ <br>
