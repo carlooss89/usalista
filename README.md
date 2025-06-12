@@ -29,24 +29,26 @@ O **Usalista** tem como objetivo permitir que usuários criem, editem e acompanh
 usalista/ <br>
 │
 ├── app/ <br>
-│   ├── schemas/ <br>
-│   │   ├── init.py <br>
+│   ├── schemas/ <br> # Schemas para entrada e saída de dados (Pydantic)
+│   │   └── init.py <br>
 │   │   └── user.py <br>
 │   ├── services/ <br>
 │   │   └── user_service.py <br>
-│   ├── models/ <br>
-│   ├── user.py <br>
-│   ├── shopping_list.py <br>  
-│   ├── shopping_list.py <br> 
+│   ├── models/ <br> # Modelos das tabelas (ORM)
+│   │   └── user.py <br>
+│   ├── shopping_list.py <br>   
 │   │── item_lista.py <br>
 │   ├── services/ <br>
-│   ├── routers/ <br>
-│   ├── database.py <br>
-│   └── main.py <br>
-│
-├── .env <br>
-├── requirements.txt <br>
-├── README.md <br>
+│   ├── utils/ # Funções auxiliares (ex: segurança)
+│   │   └── seguranca.py <br>
+│   ├── routers/ <br> # Arquivos de rotas da API
+│   │   └── user_router.py <br>
+│   ├── database.py <br> # Conexão com o banco de dados
+│   └── main.py <br> # Ponto de entrada da aplicação FastAPI
+├── .env <br> # Variáveis de ambiente (ex: DATABASE_URL)
+├── .gitgnore <br> # Arquivos e diretórios que o Git deve ignorar ao rastrear alterações em um repositório
+├── requirements.txt <br> # Pacotes e dependências do projeto
+├── README.md <br> # Documentação do projeto
 └──  <br>
 
 ---
