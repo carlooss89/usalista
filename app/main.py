@@ -1,6 +1,7 @@
 from fastapi import FastAPI # Importando o FastAPI para criar a aplicação
 from fastapi.middleware.cors import CORSMiddleware # Importando o middleware CORS para permitir requisições de diferentes origens
 from app.routers import user_router # importa o router
+from app.routers import auth # Estava "routes" mudei para "routers" / Importa o módulo de autenticação, que contém as rotas de login e autenticação
 
 app = FastAPI(  # Cria uma instância do FastAPI, que é a aplicação principal 
     title="Usalista", # Título da API, que será exibido na documentação Swagger
@@ -8,7 +9,8 @@ app = FastAPI(  # Cria uma instância do FastAPI, que é a aplicação principal
     version="1.0.0"
 )
 
-app.include_router(user_router.router) # Inclui no app / Inclui o router de usuários
+app.include_router(user_router.router, prefix="/users", tags=["Usuários"]) # Inclui o roteador de usuários, com prefixo "/users" e tag "Usuários" para organização na documentação Swagger
+app.include_router(auth.router, prefix="/auth", tags=["Autenticação"]) # Inclui o roteador de autenticação, com prefixo "/auth" e tag "Autenticação" para organização na documentação Swagger
 
 app.add_middleware( # Adiciona o middleware CORS para permitir requisições de diferentes origens
     CORSMiddleware, 

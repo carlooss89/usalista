@@ -1,8 +1,8 @@
-from sqlalchemy import create_engine 
-#Importa o create_engine do SQLAlchemy, que é responsável por criar a conexão com o banco de dados.É como ligar os cabos entre o seu app e o PostgreSQL.
+from sqlalchemy import create_engine # Importa o create_engine do SQLAlchemy, que é responsável por criar a conexão com o banco de dados. É como ligar os cabos entre o seu app e o PostgreSQL. 
 
 from sqlalchemy.ext.declarative import declarative_base
 #Aqui importamos uma ferramenta para criar a base dos modelos (tabelas).Todos os arquivos dentro de models/ vão herdar essa base para funcionar como tabelas no banco.
+
 
 from sqlalchemy.orm import sessionmaker, Session
 #Importa o sessionmaker do SQLAlchemy, que é usado para criar sessões de banco de dados.
@@ -12,6 +12,10 @@ from dotenv import load_dotenv
 #Importa o load_dotenv que lê o conteúdo do .env, onde está guardada a DATABASE_URL e outras variáveis secretas.
 
 import os # Usamos a biblioteca padrão os para acessar variáveis de ambiente que foram carregadas do .env.
+
+from app.db.base import Base # Importa a classe Base que foi criada no arquivo base.py. Essa classe é a base para todos os modelos do banco de dados, como User, ShoppingList e ItemLista.
+import app.models # Importa os modelos do banco de dados, como User, ShoppingList e ItemLista. Isso é necessário para que o SQLAlchemy reconheça essas tabelas quando criarmos o banco de dados.
+
 
 load_dotenv() # Carrega variáveis do .env
 

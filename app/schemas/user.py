@@ -14,5 +14,6 @@ class UserOut(BaseModel):
     nome: str
     email: EmailStr
 
-    class Config:
-        orm_mode = True  # Permite que o Pydantic leia objetos do SQLAlchemy
+    model_config = { # Configuração do modelo Pydantic
+        "from_attributes": True # Permite que o Pydantic crie o modelo a partir de atributos do SQLAlchemy
+    }
