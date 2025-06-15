@@ -8,7 +8,7 @@ from app.schemas.user import UserCreate, UserOut # Importando os schemas de entr
 from app.services import user_service # Importando o serviço de usuário para manipulação de dados
 from app.utils.seguranca import get_password_hash # Importando a função de hash de senha para segurança
 
-router = APIRouter(prefix="/users", tags=["Usuários"]) # Prefixo de rota e tag do Swagger para organização das rotas
+router = APIRouter(tags=["Usuários"]) # Prefixo de rota e tag do Swagger para organização das rotas # Cria uma instância do APIRouter com a tag "Usuários" # prefix="/users", foi retirado o prefixo de rota, pois não é necessário aqui, por conta do prefixo já estar definido no main.py
 
 
 @router.post("/", response_model=UserOut,status_code=201 ) # Rota para criar um novo usuário / adicionei o status_code=201 para indicar que o recurso foi criado com sucesso

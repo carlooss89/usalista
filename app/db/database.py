@@ -25,9 +25,6 @@ engine = create_engine(DATABASE_URL) # Cria o engine com SQLAlchemy
 
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine) # Cria uma fábrica de sessões
 
-Base = declarative_base() # Cria a classe base para todos os seus modelos (ex: usuários, itens, listas, etc.). Todos os modelos do projeto vão herdar de Base para se tornarem tabelas no banco.
-
-
 def get_db(): # Função para obter a sessão do banco de dados
     db: Session = SessionLocal() # Cria uma nova sessão do banco de dados
     try: # Tenta executar o bloco de código

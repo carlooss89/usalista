@@ -1,10 +1,12 @@
+from app.db.database import Base #É a classe-mãe vinda do database.py; qualquer classe que estenda Base vira tabela.
+
 from sqlalchemy import Column, Integer, String, ForeignKey #Importa os tipos de coluna que vamos usar: inteiros, strings e chaves estrangeiras.
 
 from sqlalchemy.orm import relationship #Função que cria um vínculo ORM entre tabelas.
 
 from app.db.base import Base # É a classe-mãe vinda do base.py; qualquer classe que estenda Base vira tabela.
 
-from app.db.database import Base #É a classe-mãe vinda do database.py; qualquer classe que estenda Base vira tabela.
+
 
 class ShoppingList(Base): #Nome da tabela shopping_lists. Define o modelo / tabela ShoppingList.
     __tablename__ = "shopping_lists" #Define o nome da tabela no banco de dados.

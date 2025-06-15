@@ -140,11 +140,68 @@ Execute o projeto
 
 ```uvicorn app.main:app --reload```
 
-🧪 Funcionalidades (em desenvolvimento)
+## 📌 Rotas de Usuário e Autenticação (até agora)
+✅ Cadastro de Usuário
+Endpoint:
+```POST /users/```
+
+Descrição:
+Cria um novo usuário no sistema.
+
+Exemplo de JSON para cadastro:
+
+json
+```{```
+  ```"username": "Cadu89",```
+  ```"email": "cadu89@example.com",```
+  ```"password": "123456"```
+```}```
+
+Resposta de sucesso:
+json
+```{```
+  ```"id": 1,```
+  ```"username": "Cadu89",```
+  ```"email": "cadu89@example.com"```
+```}```
+
+## ✅ Login e Geração de Token JWT
+Endpoint:
+```POST /auth/login```
+
+Descrição:
+Realiza a autenticação de usuário via e-mail e senha.
+Se for bem-sucedido, retorna um token JWT que será usado nas rotas protegidas.
+
+Formato de envio:
+👉 O login usa o formato ```application/x-www-form-urlencoded```, como pede o padrão OAuth2.
+
+Exemplo de corpo da requisição (form-data ou x-www-form-urlencoded):
+
+Campo	Valor
+username	```cadu89@example.com```
+password	123456
+
+Resposta de sucesso:
+json
+```{```
+  ```"access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",```
+  ```"token_type": "bearer"```
+```}```
+
+## ✅ Observações importantes:
+Login é feito pelo campo ```email```, mas o FastAPI espera um campo ```username``` no formulário OAuth2 (por isso usamos o email dentro do campo username no login).
+
+As senhas são armazenadas de forma segura no banco, usando hash com ```bcrypt```.
+
+Estamos usando JWT para autenticação nas próximas rotas protegidas.
+
+
+### 🧪 Funcionalidades (em desenvolvimento)
 
 ● ✅Cadastro de usuários
 
-● ⬜ Login/autenticação
+● ✅ Login/autenticação
 
 ● ⬜ CRUD de itens da lista
 

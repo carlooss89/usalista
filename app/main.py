@@ -2,6 +2,10 @@ from fastapi import FastAPI # Importando o FastAPI para criar a aplicação
 from fastapi.middleware.cors import CORSMiddleware # Importando o middleware CORS para permitir requisições de diferentes origens
 from app.routers import user_router # importa o router
 from app.routers import auth # Estava "routes" mudei para "routers" / Importa o módulo de autenticação, que contém as rotas de login e autenticação
+from app.db.database import Base, engine # Importa a classe Base e o engine do banco de dados para inicialização
+from app.models.user import User # Importa o modelo User, que define a estrutura da tabela de usuários 
+
+Base.metadata.create_all(bind=engine) # Cria todas as tabelas definidas nos modelos que herdam de Base, como User, ShoppingList e ItemLista. Isso é necessário para garantir que o banco de dados esteja atualizado com a estrutura definida nos modelos.
 
 app = FastAPI(  # Cria uma instância do FastAPI, que é a aplicação principal 
     title="Usalista", # Título da API, que será exibido na documentação Swagger
@@ -23,3 +27,5 @@ app.add_middleware( # Adiciona o middleware CORS para permitir requisições de 
 @app.get("/") # Rota raiz da API
 def read_root(): # Função que retorna uma mensagem de boas-vindas
     return {"message": "Bem-vindo à API Usalista!"} # Rota de boas-vindas da API
+
+

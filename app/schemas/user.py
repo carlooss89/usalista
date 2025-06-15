@@ -4,14 +4,13 @@ from pydantic import BaseModel, EmailStr # Importando BaseModel e EmailStr do Py
 
 # Schema usado para criar um novo usuário (entrada de dados)
 class UserCreate(BaseModel):
-    nome: str
+    username: str
     email: EmailStr
-    senha: str
+    password: str
 
-# Schema de resposta (opcional para rotas de retorno)
-class UserOut(BaseModel):
+class UserOut(BaseModel): # Schema usado para retornar os dados do usuário
     id: int
-    nome: str
+    username: str
     email: EmailStr
 
     model_config = { # Configuração do modelo Pydantic
