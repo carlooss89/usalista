@@ -1,6 +1,9 @@
 from passlib.context import CryptContext # Importa o contexto de criptografia do Passlib
 from jose import JWTError, jwt # Importa o JWTError e jwt do JOSE para manipulação de tokens JWT
 from datetime import datetime, timedelta # Importa datetime e timedelta para manipulação de datas e horas
+from fastapi.security import OAuth2PasswordBearer # Importa o esquema de segurança OAuth2 para autenticação via token
+
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/auth/auth/login") # Define o esquema de segurança OAuth2, especificando a URL onde o token pode ser obtido (neste caso, a rota de login).
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto") # Cria um contexto de criptografia usando o algoritmo bcrypt, que é seguro para armazenar senhas.
 
