@@ -39,11 +39,13 @@ usalista/ <br>
 │   ├── shopping_list.py <br>   
 │   │── item_lista.py <br>
 │   ├── services/ <br>
+│   ├── dependencies.py <br>
 │   ├── utils/ # Funções auxiliares (ex: segurança)
 │   │   └── seguranca.py <br>
 │   ├── routers/ <br> # Arquivos de rotas da API
 │   │   └── user_router.py <br>
-│   ├── database.py <br> # Conexão com o banco de dados
+│   ├── db/ 
+│   │   └── database.py <br> # Conexão com o banco de dados
 │   └── main.py <br> # Ponto de entrada da aplicação FastAPI
 ├── .env <br> # Variáveis de ambiente (ex: DATABASE_URL)
 ├── .gitgnore <br> # Arquivos e diretórios que o Git deve ignorar ao rastrear alterações em um repositório
@@ -195,6 +197,67 @@ Login é feito pelo campo ```email```, mas o FastAPI espera um campo ```username
 As senhas são armazenadas de forma segura no banco, usando hash com ```bcrypt```.
 
 Estamos usando JWT para autenticação nas próximas rotas protegidas.
+
+## ✅ Rotas protegidas por Token JWT
+A partir desta etapa, algumas rotas da API Usalista só podem ser acessadas com um token de autenticação válido.
+
+🔒 Exemplo de rota protegida:
+✔️ Obter dados do usuário logado
+Endpoint:
+
+```GET /users/me```
+
+Descrição:
+Retorna os dados do usuário atualmente autenticado.
+
+Requer:
+✅ Token JWT válido no cabeçalho da requisição.
+
+▶️ Como testar no Swagger:
+1. Faça login com um usuário válido:
+bash 
+```POST /auth/token```
+
+Envie um JSON com:
+json
+```{```
+  ```"username": "seu_email@example.com",```
+  ```"password": "suas_senha"```
+```}```
+
+Exemplo de retorno:
+json
+```{```
+  ```"access_token": "eyJ0eXAiOiJKV1QiLCJhbGci...",```
+  ```"token_type": "bearer"```
+```}```
+
+2. Copie o token (access_token retornado).
+
+3. No Swagger, clique no botão "Authorize", cole o token assim:
+
+```Bearer``` SEU_TOKEN_AQUI
+Exemplo:
+```Bearer``` Bearer eyJ0eXAiOiJKV1QiLCJhbGci...
+
+4. Agora, acesse a rota:
+```GET /users/me```
+
+✅ Se o token for válido, você verá a resposta com os dados do usuário:
+json
+```{```
+  ```"id": 1,```
+  ```"nome": "Carlos",```
+  ```"email": "carlos@example.com"```
+```}```
+
+❌ Se o token estiver ausente ou inválido, a API retornará:
+
+json
+```{```
+  ```"detail": "Não autenticado"```
+```}```
+
 
 
 ### 🧪 Funcionalidades (em desenvolvimento)
