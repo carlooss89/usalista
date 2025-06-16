@@ -7,6 +7,10 @@ from app.db.database import get_db # Importando a função get_db para obter a s
 from app.schemas.user import UserCreate, UserOut # Importando os schemas de entrada e saída do usuário
 from app.services import user_service # Importando o serviço de usuário para manipulação de dados
 from app.utils.seguranca import get_password_hash # Importando a função de hash de senha para segurança
+from app.utils.seguranca import oauth2_scheme # Importando o esquema de segurança OAuth2 para autenticação via token JWT
+from fastapi import Depends # Importando o Depends para injeção de dependências
+from app.dependencies import get_current_user # Importando a dependência para obter o usuário atual
+from app.models import User # Importando o modelo User para interagir com a tabela de usuários no banco de dados
 
 router = APIRouter(tags=["Usuários"]) # Prefixo de rota e tag do Swagger para organização das rotas # Cria uma instância do APIRouter com a tag "Usuários" # prefix="/users", foi retirado o prefixo de rota, pois não é necessário aqui, por conta do prefixo já estar definido no main.py
 
@@ -19,6 +23,21 @@ def create_user(user: UserCreate, db: Session = Depends(get_db)): # Função par
     
     return user_service.create_user(db, user) # Cria o usuário e retorna o objeto criado
 
+@router.get("/me", response_model=dict) # Rota para obter os dados do usuário atualmente autenticado/logado
+def read_current_user(current_user: User = Depends(get_current_user)):
+    """
+    Retorna os dados do usuário atualmente autenticado (requer token JWT válido).
+    """
+    return { # Retorna um dicionário com os dados do usuário autenticado
+        "id": current_user.id,
+        "username": current_user.username,
+        "email": current_user.email
+    }
+
+
+@router.get("/all", response_model=list[UserOut]) # (Opcional) Rota para listar todos os usuários
+def list_users(db: Session = Depends(get_db)): # Função para listar todos os usuários
+    return user_service.get_all_users(db) # Retorna a lista de todos os usuários encontrados
 
 @router.get("/{user_id}", response_model=UserOut) # Rota para buscar usuário por ID
 def get_user(user_id: int, db: Session = Depends(get_db)): # Função para obter um usuário pelo ID
@@ -28,6 +47,4 @@ def get_user(user_id: int, db: Session = Depends(get_db)): # Função para obter
     
     return user # Retorna o usuário encontrado
 
-@router.get("/all", response_model=list[UserOut]) # (Opcional) Rota para listar todos os usuários
-def list_users(db: Session = Depends(get_db)): # Função para listar todos os usuários
-    return user_service.get_all_users(db) # Retorna a lista de todos os usuários encontrados
+
