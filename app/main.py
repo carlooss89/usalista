@@ -1,5 +1,6 @@
 from fastapi import FastAPI # Importando o FastAPI para criar a aplicação
 from fastapi.middleware.cors import CORSMiddleware # Importando o middleware CORS para permitir requisições de diferentes origens
+from fastapi.openapi.utils import get_openapi # Importando a função get_openapi para customizar o esquema OpenAPI
 from app.routers import user_router # importa o router
 from app.routers import auth # Estava "routes" mudei para "routers" / Importa o módulo de autenticação, que contém as rotas de login e autenticação
 from app.db.database import Base, engine # Importa a classe Base e o engine do banco de dados para inicialização
@@ -28,4 +29,31 @@ app.add_middleware( # Adiciona o middleware CORS para permitir requisições de 
 def read_root(): # Função que retorna uma mensagem de boas-vindas
     return {"message": "Bem-vindo à API Usalista!"} # Rota de boas-vindas da API
 
+# Função para customizar o OpenAPI e ativar o botão "Authorize" no Swagger
+def custom_openapi():
+    if app.openapi_schema:
+        return app.openapi_schema
+    openapi_schema = get_openapi( # Importa a função get_openapi do FastAPI para gerar o esquema OpenAPI
+        title="Usalista",
+        version="1.0.0", 
+        description="Uma aplicação para gerenciar listas de compras com autenticação de usuários.", 
+        routes=app.routes,
+    )
+    openapi_schema["components"]["securitySchemes"] = {
+        "BearerAuth": { # Nome do esquema de segurança
+            "type": "http", # Tipo HTTP
+            "scheme": "bearer", # Tipo de autenticação Bearer
+            "bearerFormat": "JWT", # Formato JWT
+        }
+    }
+    # Faz com que todas as rotas exijam por padrão o esquema de segurança
+    for path in openapi_schema["paths"]:
+        for method in openapi_schema["paths"][path]:
+            if "security" not in openapi_schema["paths"][path][method]:
+                openapi_schema["paths"][path][method]["security"] = [{"BearerAuth": []}]
+    app.openapi_schema = openapi_schema
+    return app.openapi_schema
+
+# Aponta o OpenAPI da aplicação para a nova função customizada
+app.openapi = custom_openapi
 
