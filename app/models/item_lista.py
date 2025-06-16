@@ -6,7 +6,7 @@ from sqlalchemy.orm import relationship # Função que cria um vínculo ORM entr
 class ItemLista(Base): # Define o modelo / tabela ItemLista.
     __tablename__ = "itens_lista" # ← Define o nome da tabela no banco de dados.
 
-    id = Column(Integer, primary_key=True, index=True) 
+    id = Column(Integer, primary_key=True, index=True) # ← id é a chave primária da tabela, que identifica unicamente cada item.
     nome = Column(String, nullable=False) # Ex: "Arroz"
     quantidade = Column(Integer, default=1) # Ex: 2 (quantidade de arroz)
     comprado = Column(Boolean, default=False) # Ex: False (se o item foi comprado ou não)
