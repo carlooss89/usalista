@@ -318,6 +318,32 @@ Resposta (204 No Content):
 
 Nenhum conteúdo (status 204).
 
+---
+## 📋 Endpoints - Shopping Lists (Listas de Compras)
+Estes endpoints são responsáveis por criar, listar, atualizar e excluir listas de compras associadas a cada usuário.
+
+🔐 Autenticação
+✅ Todos os endpoints desta seção exigem Token JWT de autenticação.
+✅ O usuário só pode gerenciar suas próprias listas.
+
+## 📥 Exemplo de JSON para criar uma lista (POST /shopping_lists/):
+json
+```{```
+  ```"nome": "Compra da semana"```
+```}```
+
+## 📤 Exemplo de resposta (GET de uma lista):
+json 
+```{```
+  ```"id": 1,```
+  ```"nome": "Compra da semana",```
+  ```"data_criacao": "2025-06-15T12:34:56.789Z",```
+  ```"owner_id": 1,```
+  ```"items": []```
+```}```
+
+---
+🏁
 
 ▶️ Como testar no Swagger:
 1. Faça login com um usuário válido:
