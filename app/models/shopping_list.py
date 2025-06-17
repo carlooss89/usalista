@@ -14,6 +14,4 @@ class ShoppingList(Base): #Nome da tabela shopping_lists. Define o modelo / tabe
     data_criacao = Column(DateTime, default=datetime.utcnow) # data_criacao – data e hora de criação da lista. Coluna de data e hora, padrão é a data atual (UTC). 
     owner_id = Column(Integer, ForeignKey("users.id")) # Relacionamento com o dono da lista (User) / Um usuário pode ter várias listas
     owner = relationship("User", back_populates="lists") # Um usuário pode ter várias listas de compras
-    items = relationship("ItemLista", back_populates="shopping_list", cascade="all, delete-orphan") # Uma lista pode ter vários items
-    
-    items = relationship("ItemLista", back_populates="shopping_list", cascade="all, delete-orphan") # Cria um relacionamento com a tabela ItemLista, onde "shopping_list" é o nome do atributo na classe ItemLista que referencia a lista de compras, "items" é a volta do relacionamento: cada lista “sabe” quais itens ela contém.
+    items = relationship("ItemLista", back_populates="shopping_list", cascade="all, delete-orphan")  # Relacionamento com os itens da lista (ItemLista) / Uma lista pode ter vários itens
