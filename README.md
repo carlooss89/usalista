@@ -101,12 +101,6 @@ Essa estrutura permite armazenar tudo isso de forma organizada e relacional no b
 
 ---
 
-## 📌 Status do Projeto
-
-🚧 Em desenvolvimento — funcionalidades de autenticação e CRUD de listas já implementadas.
-
----
-
 ## ⚙️ Como Rodar o Projeto Localmente
 
 ## 1. **Clone o repositório**
@@ -213,6 +207,118 @@ Retorna os dados do usuário atualmente autenticado.
 Requer:
 ✅ Token JWT válido no cabeçalho da requisição.
 
+## 📌 Endpoints - Itens da Lista
+Esses endpoints permitem que o usuário autenticado faça o CRUD (Create, Read, Update, Delete) dos itens dentro de suas listas de compras.
+
+Importante: Todos os endpoints abaixo exigem autenticação via Token JWT.
+
+## 🔸 Criar um novo Item
+POST /items/
+
+Requer Token JWT
+
+Body JSON Exemplo:
+json
+```{```
+  ```"nome": "Arroz",```
+  ```"quantidade": 2,```
+  ```"comprado": false,```
+  ```"shopping_list_id": 1```
+```}```
+
+. Resposta Exemplo (201 Created):
+json
+```{```
+  ```"id": 5,```
+  ```"nome": "Arroz",```
+  ```"quantidade": 2,```
+  ```"comprado": false,```
+  ```"data_criacao": "2025-06-15T15:30:00.000Z",```
+  ```"dono_id": 1,```
+  ```"shopping_list_id": 1```
+```}```
+
+## 🔸 Listar Itens do Usuário
+GET /items/
+
+Requer Token JWT
+
+Resposta Exemplo:
+
+json
+```[```
+  ```{```
+    ```"id": 1,```
+    ```"nome": "Arroz",```
+    ```"quantidade": 2,```
+    ```"comprado": false,```
+    ```"data_criacao": "2025-06-15T15:30:00.000Z",```
+    ```"dono_id": 1,```
+    ```"shopping_list_id": 1```
+  ```},```
+ ``` ...```
+```]```
+
+## 🔸 Obter detalhes de um Item específico
+GET /items/{item_id}
+
+Requer Token JWT
+
+Exemplo: /items/1
+
+Resposta Exemplo:
+
+json
+```{```
+  ```"id": 1,```
+  ```"nome": "Arroz",```
+  ```"quantidade": 2,```
+  ```"comprado": false,```
+  ```"data_criacao": "2025-06-15T15:30:00.000Z",```
+  ```"dono_id": 1,```
+  ```"shopping_list_id": 1```
+```}```
+
+## 🔸 Atualizar um Item
+PUT /items/{item_id}
+
+Requer Token JWT
+
+Body JSON Exemplo:
+
+json
+```{```
+  ```"nome": "Arroz Integral",```
+  ```"quantidade": 3,```
+  ```"comprado": true,```
+  ```"shopping_list_id": 1```
+```}```
+
+. Resposta Exemplo:
+
+json
+```{```
+  ```"id": 1,```
+  ```"nome": "Arroz Integral",```
+  ```"quantidade": 3,```
+  ```"comprado": true,```
+  ```"data_criacao": "2025-06-15T15:30:00.000Z",```
+  ```"dono_id": 1,```
+  ```"shopping_list_id": 1```
+```}```
+
+## 🔸 Deletar um Item
+DELETE ```/items/{item_id}```
+
+Requer Token JWT
+
+Exemplo: ```/items/1```
+
+Resposta (204 No Content):
+
+Nenhum conteúdo (status 204).
+
+
 ▶️ Como testar no Swagger:
 1. Faça login com um usuário válido:
 bash 
@@ -258,7 +364,11 @@ json
   ```"detail": "Não autenticado"```
 ```}```
 
+---
 
+## 📌 Status do Projeto
+
+🚧 Em desenvolvimento — funcionalidades de autenticação e CRUD de listas já implementadas.
 
 ### 🧪 Funcionalidades (em desenvolvimento)
 
