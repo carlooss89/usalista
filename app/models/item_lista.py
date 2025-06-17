@@ -10,6 +10,11 @@ class ItemLista(Base): # Define o modelo / tabela ItemLista.
     nome = Column(String, nullable=False) # Ex: "Arroz"
     quantidade = Column(Integer, default=1) # Ex: 2 (quantidade de arroz)
     comprado = Column(Boolean, default=False) # Ex: False (se o item foi comprado ou não)
+    data_criacao = Column(DateTime, default=datetime.utcnow)  # Data e hora de criação do item
+    
+    dono_id = Column(Integer, ForeignKey("users.id"))  # Chave estrangeira para o usuário dono do item
+    
+    dono = relationship("User", back_populates="itens")  # Relacionamento com o modelo User (cria um campo .dono no item)
 
     shopping_list_id = Column(Integer, ForeignKey("shopping_lists.id")) # ← item pertence a uma lista / shopping_list_id é a chave estrangeira que conecta este item à lista de compras
     
