@@ -343,6 +343,17 @@ json
 ```}```
 
 ---
+## ✅ Regras de acesso para Shopping Lists:
+▫️ O usuário só pode visualizar, editar ou excluir listas que ele mesmo criou.
+
+▫️ No futuro: Quando for implementar o recurso de listas compartilhadas, o comportamento será:
+
+▫️ Visualizar: Usuário poderá ver listas que foram compartilhadas com ele.
+
+▫️ Editar/Deletar: Apenas o dono da lista ou pessoas com permissão explícita.
+
+▫️ Adicionar itens: Poderá ser liberado para usuários convidados (configurável por permissão).
+
 🏁
 
 ▶️ Como testar no Swagger:
